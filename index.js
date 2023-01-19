@@ -14,7 +14,7 @@ app.use(bodyParser.json({limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true }))
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:3000", "https://share-memory.onrender.com"],
+  origin: ["http://localhost:3000", "https://mern-share-memory-api.onrender.com/"],
 }));
 
 app.use("/api/memory", memoryRoutes);
