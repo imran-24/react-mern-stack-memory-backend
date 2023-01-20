@@ -16,7 +16,7 @@ router.post('/signin/', async (req, res) => {
             return res.status(400).json({message: "Please fill out all the fields"})
         }
 
-        const user = await User.findOne({email});
+        const user = await User.findOne({email: email});
         console.log(user)
         
         if(user && await bcrypt.compare(password, user.password)){
@@ -48,7 +48,7 @@ router.post('/signup/', async (req, res) => {
             return res.status(400).json({message: "Please fill out all the fields"})
         }
 
-        const existing = await User.findOne({email});
+        const existing = await User.findOne({email: email});
         console.log(existing)
         if(existing) return res.status(400).json({message:"Account already exists"})
 
