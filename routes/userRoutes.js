@@ -5,7 +5,7 @@ import User from '../models/User.js';
 
 const router = express.Router();
 
-router.post('/signin/', async (req, res) => {
+router.post('/', async (req, res) => {
    
     const {email, password} = req.body;
     console.log(email, password)
@@ -78,23 +78,7 @@ router.post('/signup/', async (req, res) => {
 });
 
 
-router.get('/', async (req, res) => {
-    try{
 
-        const existing = await User.find();
-        
-        res.status(201).json(existing)
-
-
-    }
-    catch(error){
-        res.status(400).json(error.message);
-    }
-});
-
-const generateToken = (id) =>{
-    return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {expiresIn: '30d'})
-}
 
 
 export default router
