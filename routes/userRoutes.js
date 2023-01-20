@@ -33,7 +33,7 @@ router.post('/signin', async (req, res) => {
         
     }
     catch(error){
-        res.status(400).json(error.message);
+        res.status(400).json(error);
 
     }
 })
@@ -74,6 +74,21 @@ router.post('/signup', async (req, res) => {
     }
     catch(error){
         res.status(400).json({error});
+    }
+});
+
+
+router.get('/', async (req, res) => {
+    try{
+
+        const existing = await User.find();
+        
+        res.status(201).json(existing)
+
+
+    }
+    catch(error){
+        res.status(400).json(error.message);
     }
 });
 
