@@ -92,9 +92,9 @@ router.post('/signup/', async (req, res) => {
 //     }
 // });
 
-// const generateToken = (id) =>{
-//     return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {expiresIn: '30d'})
-// }
+const generateToken = (id) =>{
+    return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {expiresIn: '30d'})
+}
 
 
 export default router
