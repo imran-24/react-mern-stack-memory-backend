@@ -5,38 +5,37 @@ import User from '../models/User.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.post('/signin/', async (req, res) => {
    
-    // const {email, password} = req.body;
-    // console.log(email, password)
-    // try{
+    const {email, password} = req.body;
+    console.log(email, password)
+    try{
 
-    //     if(!email || !password) 
-    //     {
-    //         return res.status(400).json({message: "Please fill out all the fields"})
-    //     }
+        if(!email || !password) 
+        {
+            return res.status(400).json({message: "Please fill out all the fields"})
+        }
 
-    //     const user = await User.findOne({email: email});
-    //     console.log(user)
+        const user = await User.findOne({email: email});
+        console.log(user)
         
-    //     if(user && await bcrypt.compare(password, user.password)){
-    //         const {password: pass , ...others  } = user._doc
+        if(user && await bcrypt.compare(password, user.password)){
+            const {password: pass , ...others  } = user._doc
            
-    //         return res.status(200).json({
-    //                ...others,
-    //                token: generateToken(user._id)
-    //         })
-            
-    //     }
-    //     res.status(401).json({message:"Wrong credentials!"})
+            return res.status(200).json({
+                   ...others,
+                   token: generateToken(user._id)
+            })
+    
+        }
+        res.status(401).json({message:"Wrong credentials!"})
 
         
-    // }
-    // catch(error){
-    //     res.status(400).json(error.message);
+    }
+    catch(error){
+        res.status(400).json(error.message);
 
-    // }
-    res.status(200).send('hi')
+    }
 })
 
 
@@ -45,9 +44,9 @@ router.post('/signup/', async (req, res) => {
     console.log(name, email, password)
     try{
 
-        if(!name || !email || !password ) {
-            return res.status(400).json({message: "Please fill out all the fields"})
-        }
+        // if(!name || !email || !password ) {
+        //     return res.status(400).json({message: "Please fill out all the fields"})
+        // }
 
         const existing = await User.findOne({email: email});
         console.log(existing)
@@ -79,7 +78,23 @@ router.post('/signup/', async (req, res) => {
 });
 
 
+// router.get('/', async (req, res) => {
+//     try{
 
+//         const existing = await User.find();
+        
+//         res.status(201).json(existing)
+
+
+//     }
+//     catch(error){
+//         res.status(400).json(error.message);
+//     }
+// });
+
+// const generateToken = (id) =>{
+//     return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {expiresIn: '30d'})
+// }
 
 
 export default router
