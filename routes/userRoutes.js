@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/signin', async (req, res) => {
    
     const {email, password} = req.body;
-    
+    console.log(email, password)
     try{
 
         if(!email || !password) 
